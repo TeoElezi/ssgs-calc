@@ -19,4 +19,4 @@ jobs:
         run: npm install
 
       - name: Esegui test con coverage
-        run: npm test
+        run: npx jest --coverage
