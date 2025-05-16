@@ -4,7 +4,8 @@
   "description": "Una semplice calcolatrice da linea di comando sviluppata in Node.js, come esercitazione del Laboratorio 6, Esercizio 2 del corso SSGS.",
   "main": "math.js",
   "devDependencies": {
-    "jest": "^29.0.0"
+    "jest": "^29.0.0",
+    "ts-node": "^10.9.2"
   },
   "scripts": {
     "test": "jest --coverage"
