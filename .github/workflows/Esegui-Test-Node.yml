@@ -17,5 +17,8 @@ jobs:
       - name: Installa dipendenze
         run: npm install
 
+      - name: Dai permessi di esecuzione a jest
+        run: chmod +x ./node_modules/.bin/jest
+
       - name: Esegui test con coverage
         run: npx jest --coverage
