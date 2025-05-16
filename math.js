@@ -1,6 +1,3 @@
-// math.js
-
-// Funzioni matematiche
 function pow(base, exponent) {
     
     return Math.pow(base, exponent);
@@ -22,6 +19,7 @@ function divide(a, b) {
     return a / b;
 }
 
+/* istanbul ignore next */
 const greetings = [
     "Arrivederci e buona giornata!",
     "Alla prossima, continua a calcolare!",
@@ -30,8 +28,6 @@ const greetings = [
 ];
 
 /* istanbul ignore next */
-
-// Funzione unica per la CLI
 function runCalculatorCLI() {
     const readline = require('readline');
     const rl = readline.createInterface({
@@ -112,7 +108,7 @@ module.exports = {
     runCalculatorCLI
 };
 
-// Per esecuzione diretta da CLI
+/* istanbul ignore next */
 if (require.main === module) {
     runCalculatorCLI();
 }
