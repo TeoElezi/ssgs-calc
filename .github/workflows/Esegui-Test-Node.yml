@@ -1,0 +1,22 @@
+name: Esegui Test Node
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout codice
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+
+      - name: Installa dipendenze
+        run: npm install
+
+      - name: Esegui test con coverage
+        run: npm test
