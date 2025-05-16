@@ -1,11 +1,26 @@
+// math.js
 
-// CLI application (cli.js)
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// Funzioni matematiche
+function pow(base, exponent) {
+    
+    return Math.pow(base, exponent);
+}
+function sum(a, b) {
+    
+    return a + b;
+}
+function subtract(a, b) {
+    
+    return a - b;
+}
+function multiply(a, b) {
+    
+    return a * b;
+}
+function divide(a, b) {
+    
+    return a / b;
+}
 
 const greetings = [
     "Arrivederci e buona giornata!",
@@ -14,44 +29,78 @@ const greetings = [
     "Grazie per aver usato la calcolatrice CLI!"
 ];
 
-function getRandomGreeting() {
-    return greetings[Math.floor(Math.random() * greetings.length)];
-}
+/* istanbul ignore next */
 
+// Funzione unica per la CLI
+function runCalculatorCLI() {
+    const readline = require('readline');
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
-// Funzione per calcolare la potenza
-function pow(base, exponent) {
-    if (isNaN(base) || isNaN(exponent)) {
-        throw new Error("Entrambi i valori devono essere numeri.");
+    function askOperation() {
+        console.log("\nBenvenuto nella calcolatrice CLI!");
+        console.log("Operazioni disponibili:");
+        console.log("1. Addizione");
+        console.log("2. Sottrazione");
+        console.log("3. Moltiplicazione");
+        console.log("4. Divisione");
+        console.log("5. Potenza");
+        
+        rl.question("Seleziona un'operazione (1-5): ", (operation) => {
+            if (!["1", "2", "3", "4", "5"].includes(operation)) {
+                console.log("Errore: operazione non valida. Riprova.");
+                return askOperation();
+            }
+            askNumbers(operation);
+        });
     }
-    return Math.pow(base, exponent);
-}
-function sum(a, b) {
-    if (isNaN(a) || isNaN(b)) {
-        throw new Error("Entrambi i valori devono essere numeri.");
+
+    function askNumbers(operation) {
+        rl.question("Inserisci il primo numero: ", (num1) => {
+            rl.question("Inserisci il secondo numero: ", (num2) => {
+                const a = parseFloat(num1);
+                const b = parseFloat(num2);
+
+                if (isNaN(a) || isNaN(b)) {
+                    console.log("Errore: inserisci numeri validi.");
+                    return askNumbers(operation);
+                }
+
+                let result;
+                try {
+                    switch (operation) {
+                        case "1": result = sum(a,b); break;
+                        case "2": result = subtract(a,b); break;
+                        case "3": result = multiply(a,b); break;
+                        case "4": result = divide(a,b); break;
+                        case "5": result = pow(a, b); break;
+                    }
+                    console.log(`Risultato: ${result}`);
+                } catch (error) {
+                    console.log(error.message);
+                }
+                askContinue();
+            });
+        });
     }
-    return a + b;
-}
-function subtract(a, b) {
-    if (isNaN(a) || isNaN(b)) {
-        throw new Error("Entrambi i valori devono essere numeri.");
+
+    function askContinue() {
+        rl.question("Vuoi eseguire un'altra operazione? (s/n): ", (answer) => {
+            if (answer.toLowerCase() === 's') {
+                askOperation();
+            } else if (answer.toLowerCase()!== 'n' && answer.toLowerCase() !== 's') {
+                console.log("Errore: risposta non valida. Riprova.");
+                askContinue();
+            } else {
+                console.log(greetings[Math.floor(Math.random() * greetings.length)]);
+                rl.close();
+            }
+        });
     }
-    return a - b;
-}
-function multiply(a, b) {
-    if (isNaN(a) || isNaN(b)) {
-        throw new Error("Entrambi i valori devono essere numeri.");
-    }
-    return a * b;
-}
-function divide(a, b) {
-    if (isNaN(a) || isNaN(b)) {
-        throw new Error("Entrambi i valori devono essere numeri.");
-    }
-    if (Object.is(b, 0)) {
-        throw new Error("Impossibile dividere per zero.");
-    }
-    return a / b;
+
+    askOperation();
 }
 
 module.exports = {
@@ -59,70 +108,11 @@ module.exports = {
     subtract,
     multiply,
     divide,
-    pow
+    pow,
+    runCalculatorCLI
 };
-console.log("Modulo di calcolo caricato.");
 
-function askOperation() {
-    console.log("\nBenvenuto nella calcolatrice CLI!");
-    console.log("Operazioni disponibili:");
-    console.log("1. Addizione");
-    console.log("2. Sottrazione");
-    console.log("3. Moltiplicazione");
-    console.log("4. Divisione");
-    console.log("5. Potenza");
-    
-    rl.question("Seleziona un'operazione (1-5): ", (operation) => {
-        if (!["1", "2", "3", "4", "5"].includes(operation)) {
-            console.log("Errore: operazione non valida. Riprova.");
-            return askOperation();
-        }
-        
-        askNumbers(operation);
-    });
+// Per esecuzione diretta da CLI
+if (require.main === module) {
+    runCalculatorCLI();
 }
-
-function askNumbers(operation) {
-    rl.question("Inserisci il primo numero: ", (num1) => {
-        rl.question("Inserisci il secondo numero: ", (num2) => {
-            const a = parseFloat(num1);
-            const b = parseFloat(num2);
-
-            if (isNaN(a) || isNaN(b)) {
-                console.log("Errore: inserisci numeri validi.");
-                return askNumbers(operation);
-            }
-
-            let result;
-            try {
-                switch (operation) {
-                    case "1": result = sum(a,b); break;
-                    case "2": result = subtract(a,b); break;
-                    case "3": result = multiply(a,b); break;
-                    case "4": result = divide(a,b); break;
-                    case "5": result = pow(a, b); break;
-                }
-                console.log(`Risultato: ${result}`);
-            } catch (error) {
-                console.log(error.message);
-            }
-            askContinue();
-        });
-    });
-}
-
-function askContinue() {
-    rl.question("Vuoi eseguire un'altra operazione? (s/n): ", (answer) => {
-        if (answer.toLowerCase() === 's') {
-            askOperation();
-        } else if (answer.toLowerCase()!== 'n' && answer.toLowerCase() !== 's') {
-            console.log("Errore: risposta non valida. Riprova.");
-            askContinue();
-        } else {
-            console.log(getRandomGreeting());
-            rl.close();
-        }
-    });
-}
-
-askOperation();
