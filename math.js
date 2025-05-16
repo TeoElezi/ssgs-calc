@@ -20,14 +20,6 @@ function divide(a, b) {
 }
 
 /* istanbul ignore next */
-const greetings = [
-    "Arrivederci e buona giornata!",
-    "Alla prossima, continua a calcolare!",
-    "Ciao! Torna presto a trovarci!",
-    "Grazie per aver usato la calcolatrice CLI!"
-];
-
-/* istanbul ignore next */
 function runCalculatorCLI() {
     const readline = require('readline');
     const rl = readline.createInterface({
@@ -90,7 +82,7 @@ function runCalculatorCLI() {
                 console.log("Errore: risposta non valida. Riprova.");
                 askContinue();
             } else {
-                console.log(greetings[Math.floor(Math.random() * greetings.length)]);
+                console.log("Grazie per aver usato la calcolatrice CLI!");
                 rl.close();
             }
         });
