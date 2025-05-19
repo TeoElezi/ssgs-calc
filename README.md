@@ -14,7 +14,7 @@ Una calcolatrice matematica Node.js con test automatizzati e integrazione contin
 
 ```bash
 # Clona il repository
-git clone https://github.com/tuo-username/ssgs-calc.git
+git clone https://github.com/TeoElezi/ssgs-calc
 
 # Entra nella cartella del progetto
 cd ssgs-calc
