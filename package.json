@@ -1,16 +1,36 @@
 {
   "name": "ssgs-calc",
-  "version": "1.0.0",
-  "description": "Una semplice calcolatrice da linea di comando sviluppata in Node.js, come esercitazione del Laboratorio 6, Esercizio 2 del corso SSGS.",
-  "main": "math.js",
-  "devDependencies": {
-    "jest": "^29.0.0",
-    "ts-node": "^10.9.2"
+  "version": "1.0.1",
+  "description": "Calcolatrice da terminale con test automatizzati e integrazione continua",
+  "main": "src/math.js",
+  "bin": {
+    "ssgs-calc": "./src/cli.js"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "start": "node src/cli.js",
+    "test": "jest --coverage",
+    "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeoElezi/ssgs-calc"
+  },
+  "keywords": [
+    "calculator",
+    "matematica",
+    "cli",
+    "ssgs",
+    "nodejs"
+  ],
+  "author": "Matteo Elezi <5283664@studenti.unige.it>",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "dependencies": {
+    "inquirer": "^9.2.12"
+  }
 }
