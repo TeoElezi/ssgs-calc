@@ -27,6 +27,10 @@
   ],
   "author": "Matteo Elezi <5283664@studenti.unige.it>",
   "license": "ISC",
+  "homepage": "https://github.com/TeoElezi/ssgs-calc#readme",
+  "bugs": {
+    "url": "https://github.com/TeoElezi/ssgs-calc/issues"
+  },
   "devDependencies": {
     "jest": "^29.0.0"
   },
